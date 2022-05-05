@@ -37,18 +37,6 @@
     </div>
   </label>
 
-  <small
-    >{{'DO_NOT_HAVE_ACCOUNT' | translate}}
-    <a ui-sref="user.signup" ng-click="closeThisDialog()"
-      >{{'CLICK_HERE_TO_SIGNUP' | translate}}</a
-    ></small
-  ><br />
-  <small
-    ><a href="#" ng-click="signinCtrl.requestResetPassword()"
-      >{{'FORGOT_YOUR_PASSWORD' | translate}}</a
-    ></small
-  >
-
   <div class="message message--main" ng-if="signinCtrl.error">
     {{signinCtrl.error.reason || 'Looks like there was a server issue.'}}
   </div>

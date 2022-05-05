@@ -10,13 +10,6 @@
         <li
           class="budgets-header__action"
           ng-if="!userCtrl.email"
-          ui-sref="user.signup"
-        >
-          {{'UPGRADE_OR_SIGNUP' | translate}}
-        </li>
-        <li
-          class="budgets-header__action"
-          ng-if="!userCtrl.email"
           ng-click="userCtrl.signin()"
         >
           {{'LOGIN' | translate}}
@@ -44,7 +37,6 @@
   <!-- <service-worker-status></service-worker-status> -->
 
   <div class="budgets">
-    <div class="budgets__title">{{'YOUR_BUDGETS' | translate}}</div>
 
     <ul class="budgets__budgets" disable-ng-animate>
       <li
@@ -111,10 +103,7 @@
       </li>
     </ul>
 
-    <div class="budgets__title">{{'BILLING' | translate}}</div>
-
     <div ng-if="userCtrl.isFree === true">
-      <p>{{'FREE_VERSION_EXPLANATION' | translate}}</p>
 
       <button class="button" ng-click="userCtrl.removeLocalData()">
         <i class="fa fa-times"></i> {{'REMOVE_LOCAL_BUDGETS' | translate}}
@@ -135,115 +124,6 @@
       >
         {{'LOADING_SUBSCRIPTION' | translate}}
       </p>
-
-      <div
-        ng-if="!userCtrl.loadingSubscription && !userCtrl.loadingSource && !userCtrl.loadingFailed"
-      >
-        <h2>{{'YOUR_SUBSCRIPTION' | translate}}</h2>
-
-        <div ng-if="userCtrl.subscription">
-          <div ng-if="userCtrl.subscription.cancel_at_period_end">
-            <p
-              ng-if="userCtrl.subscription.status === 'trialing'"
-              translate="TRIAL_CANCELLED_EXPLANATION"
-              translate-values="{date: (userCtrl.subscription.current_period_end * 1000 | date)}"
-            ></p>
-
-            <p
-              ng-if="userCtrl.subscription.status !== 'trialing'"
-              translate="SUBSCRIPTION_CANCELLED_EXPLANATION"
-              translate-values="{date: (userCtrl.subscription.current_period_end * 1000 | date)}"
-            ></p>
-
-            <button
-              class="button button--primary"
-              ladda="userCtrl.loadingStartSubscription"
-              ng-click="userCtrl.startSubscription()"
-            >
-              {{'RESUME_MY_SUBSCRIPTION' | translate}}
-            </button>
-          </div>
-
-          <div ng-if="!userCtrl.subscription.cancel_at_period_end">
-            <div ng-if="userCtrl.source">
-              <p
-                translate="SUBSCRIPTION_BILLING_EXPLANATION"
-                translate-values="{date: (userCtrl.subscription.current_period_end * 1000 | date), amount: (userCtrl.subscription.plan.amount | intCurrency | currency : '$'), last4: userCtrl.source.last4}"
-              ></p>
-
-              <button
-                class="button"
-                ladda="userCtrl.loadingStopSubscription"
-                ng-click="userCtrl.stopSubscription()"
-              >
-                {{'CANCEL_SUBSCRIPTION' | translate}}
-              </button>
-
-              <p>
-                <small
-                  translate="CANCEL_SUBSCRIPTION_SERVICE_CONTINUATION_EXPLANATION"
-                  translate-values="{date: (userCtrl.subscription.current_period_end * 1000 | date)}"
-                ></small>
-              </p>
-            </div>
-
-            <div ng-if="!userCtrl.source">
-              <p
-                translate="NO_CARD_ON_ACCOUNT"
-                translate-values="{date: (userCtrl.subscription.current_period_end * 1000 | date)}"
-              ></p>
-            </div>
-          </div>
-        </div>
-
-        <div ng-if="!userCtrl.subscription">
-          <p>
-            {{'NO_SUBSCRIPTION' | translate}}
-            <span ng-if="!userCtrl.source"
-              >{{'YOU_MUST_ADD_A_PAYMENT_METHOD' | translate}}</span
-            >
-          </p>
-
-          <div ng-if="userCtrl.source">
-            <button
-              class="button button--primary"
-              ladda="userCtrl.loadingStartSubscription"
-              ng-click="userCtrl.startSubscription()"
-            >
-              <span
-                translate="START_SUBSCRIPTION"
-                translate-values="{amount: (12 | currency : '$')}"
-              ></span>
-            </button>
-          </div>
-        </div>
-
-        <h2>{{'YOUR_PAYMENT_METHOD' | translate}}</h2>
-
-        <p ng-if="!userCtrl.source">
-          <button
-            class="button button--primary"
-            ng-if="!userCtrl.source"
-            ng-click="userCtrl.addCard()"
-          >
-            + {{'ADD_A_CARD' | translate}}
-          </button>
-        </p>
-
-        <div ng-if="userCtrl.source">
-          <p
-            translate="CARD_ON_ACCOUNT_EXPLANATION"
-            translate-values="{brand: userCtrl.source.brand, last4: userCtrl.source.last4}"
-          ></p>
-
-          <button
-            class="button"
-            ladda="userCtrl.loadingRemoveSource"
-            ng-click="userCtrl.removeSource()"
-          >
-            {{'REMOVE_CARD' | translate}}
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -251,7 +131,6 @@
   <div class="budgets-footer">
     <div class="budgets-footer__container">
       <div class="budgets-footer__website">
-        <a href="https://financier.io">← {{'BACK_TO_WEBSITE' | translate}}</a>
       </div>
       <a
         target="_blank"
